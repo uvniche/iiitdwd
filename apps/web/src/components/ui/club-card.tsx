@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/drawer";
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface ClubCardProps {
   name: string;
@@ -34,7 +34,7 @@ interface ClubCardProps {
   };
 }
 
-export function ClubCard({
+export const ClubCard: React.FC<ClubCardProps> = ({
   name,
   logo,
   imageUrl,
@@ -46,7 +46,7 @@ export function ClubCard({
   vision,
   mission,
   socials,
-}: ClubCardProps) {
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [drawerDirection, setDrawerDirection] = useState<"bottom" | "right">(
     "bottom"
@@ -66,14 +66,14 @@ export function ClubCard({
     <>
       <div
         className="group cursor-pointer h-full"
-        // onClick={() => setIsOpen(true)}
+        onClick={() => setIsOpen(true)}
         role="button"
         tabIndex={0}
-        // onKeyDown={(e) => {
-        //   if (e.key === 'Enter' || e.key === ' ') {
-        //     setIsOpen(true);
-        //   }
-        // }}
+        onKeyDown={e => {
+          if (e.key === "Enter" || e.key === " ") {
+            setIsOpen(true);
+          }
+        }}
       >
         <Card className="overflow-hidden h-full p-0 gap-0 border shadow-lg transition-all duration-300 group-hover:shadow-2xl bg-white">
           <div className="relative h-48 w-full flex-none overflow-hidden">
@@ -222,4 +222,4 @@ export function ClubCard({
       </Drawer>
     </>
   );
-}
+};
